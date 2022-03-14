@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'flowbite';
+const axios = require('axios');
+
+axios.defaults.baseURL = "https://manager-stage.herokuapp.com/api/v1";
 
 ReactDOM.render(
   <React.StrictMode>
