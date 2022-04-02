@@ -14,9 +14,9 @@ function Sidebar({children}) {
             <div className="w-full h-full bg-gray-200">
                 <div className="flex flex-no-wrap">
                     {/* Sidebar starts */}
-                    <div className="absolute lg:relative w-64 h-screen shadow bg-white hidden lg:block">
+                    <div className="absolute lg:relative w-64 shadow bg-white hidden lg:block" style={{minHeight: "100vh"}}>
                         <div className="h-16 w-full flex items-center px-8">
-                            <p className="text-3xl font-semibold text-violet-600">
+                            <p className="text-3xl font-semibold text-indigo-600">
                                Manager
                             </p>
                         </div>

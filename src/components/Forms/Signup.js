@@ -11,7 +11,7 @@ function Signup() {
     const onSubmit = (data) => console.log(data);
 
     return (
-        <div className="w-5/12 px-3 pb-1">
+        <div className="px-3 pb-1 sm:w-96 md:5/12 lg:5/12">
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-1" onSubmit={handleSubmit(onSubmit)}>
                 <h4 className="font-semibold text-xl text-emerald-500 mb-3">Register</h4>
                 <hr className="mb-2" />
