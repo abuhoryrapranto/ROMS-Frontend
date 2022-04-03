@@ -12,11 +12,12 @@ function Menu() {
     const [menus, setMenus] = useState([]);
     const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(0);
+    const [category, setCategory] = useState([]);
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     useEffect(() => {
-        document.title = "Menu"
+        document.title = "Menus"
     }, []);
 
     const fetchMenus = async () => {
@@ -42,6 +43,29 @@ function Menu() {
         fetchMenus();
 
     }, []);
+
+    const fetchCategories = async () => {
+
+        const token = localStorage.getItem('token');
+        axios.get('/categories/all', {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        })
+            .then(res => {
+                setCategory(res.data.data);
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    useEffect(() => {
+
+        fetchCategories();
+
+    }, []);
+
 
     return(
        <Layout>
@@ -90,6 +114,15 @@ function Menu() {
                     {errors.name && <small className="text-red-500">{errors.name?.message}</small>}
 
                 </div>
+                <div className="mb-4 w-auto">
+                    <label className="block text-indigo-500 text-sm font-bold mb-2">Category</label>
+                    <select id="countries" class="shadow appearance-none border border-indigo-500 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:shadow-outline">
+                    <option value="">---Select---</option>
+                    {category?.map(item => (
+                        <option value={item.id}>{item.name}</option>
+                    ))}
+                    </select>
+                </div>
 
                 <div className="mb-4 w-auto">
                     <label className="block text-indigo-500 text-sm font-bold mb-2">Variants</label>
@@ -130,6 +163,15 @@ function Menu() {
 
                     {errors.offerPrice && <small className="text-red-500">{errors.offerPrice?.message}</small>}
 
+                </div>
+
+                <div className="mb-4 w-auto">
+                    <label className="block text-indigo-500 text-sm font-bold mb-2">Type</label>
+                    <select id="countries" class="shadow appearance-none border border-indigo-500 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:shadow-outline">
+                    <option value="">---Select---</option>
+                    <option value="regular">Regular</option>
+                    <option value="addon">Addon</option>
+                    </select>
                 </div>
 
             </Modal>

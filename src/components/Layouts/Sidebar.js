@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Sidebar({children}) {
   const [show, setShow] = useState(false);
@@ -8,6 +8,8 @@ function Sidebar({children}) {
     // const [menu1, setMenu1] = useState(false);
     // const [menu2, setMenu2] = useState(false);
     // const [menu3, setMenu3] = useState(false);
+
+    let location = useLocation();
 
     return (
         <>
@@ -21,8 +23,10 @@ function Sidebar({children}) {
                             </p>
                         </div>
                         <hr />
-                        <ul className=" py-6">
-                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal pb-4 pt-5 text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                        
+                        <ul className="py-6">
+                        <Link to="/dashboard">
+                            <li className={"m-2 pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal text-indigo-700 focus:text-indigo-700 focus:outline-none " + (location.pathname === "/dashboard" ? "bg-black rounded pt-2 pb-2" : "pb-2 pt-2")}>
                                 <div className="flex items-center">
                                     <div>
                                         <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -33,43 +37,50 @@ function Sidebar({children}) {
                                             <rect x={14} y={14} width={6} height={6} rx={1} />
                                         </svg>
                                     </div>
-                                    <Link to="/dashboard"><span className="ml-2">Dashborad</span></Link>
-                                </div>
-                            </li>
-                            <li className="pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal pb-4 pt-5 text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                <div className="flex items-center">
-                                    <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" />
-                                            <rect x={4} y={4} width={6} height={6} rx={1} />
-                                            <rect x={14} y={4} width={6} height={6} rx={1} />
-                                            <rect x={4} y={14} width={6} height={6} rx={1} />
-                                            <rect x={14} y={14} width={6} height={6} rx={1} />
-                                        </svg>
+                                        <span className="ml-2">Dashborad</span>
                                     </div>
-                                    <Link to="/cashbox"><span className="ml-2">Cashbox</span></Link>
-                                </div>
-                            </li>
-                            <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-4 mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                <div className="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-puzzle" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1" />
-                                    </svg>
-                                    <Link to="/categories"><span className="ml-2">Categories</span></Link>
-                                </div>
-                            </li>
-                            <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mb-4 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                <div className="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-compass" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <polyline points="8 16 10 10 16 8 14 14 8 16" />
-                                        <circle cx={12} cy={12} r={9} />
-                                    </svg>
-                                    <Link to="/menu"><span className="ml-2">Menu</span></Link>
-                                </div>
-                            </li>
-                            <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
+                                </li>
+                            </Link>
+                            <Link to="/cashbox">
+                                <li className={"m-2 pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal text-indigo-700 focus:text-indigo-700 focus:outline-none " + (location.pathname === "/cashbox" ? "bg-black rounded pt-2 pb-2" : "pb-2 pt-2")}>
+                                    <div className="flex items-center">
+                                        <div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" />
+                                                <rect x={4} y={4} width={6} height={6} rx={1} />
+                                                <rect x={14} y={4} width={6} height={6} rx={1} />
+                                                <rect x={4} y={14} width={6} height={6} rx={1} />
+                                                <rect x={14} y={14} width={6} height={6} rx={1} />
+                                            </svg>
+                                        </div>
+                                        <span className="ml-2">Cashbox</span>
+                                    </div>
+                                </li>
+                            </Link>
+                            <Link to="/categories">
+                                <li className={"m-2 pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal text-indigo-700 focus:text-indigo-700 focus:outline-none " + (location.pathname === "/categories" ? "bg-black rounded pt-2 pb-2" : "pb-2 pt-2")}>
+                                    <div className="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-puzzle" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" />
+                                            <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1" />
+                                        </svg>
+                                        <span className="ml-2">Categories</span>
+                                    </div>
+                                </li>
+                            </Link>
+                            <Link to="/menus">
+                                <li className={"m-2 pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal text-indigo-700 focus:text-indigo-700 focus:outline-none " + (location.pathname === "/menus" ? "bg-black rounded pt-2 pb-2" : "pb-2 pt-2")}>
+                                    <div className="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-compass" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" />
+                                            <polyline points="8 16 10 10 16 8 14 14 8 16" />
+                                            <circle cx={12} cy={12} r={9} />
+                                        </svg>
+                                        <span className="ml-2">Menus</span>
+                                    </div>
+                                </li>
+                            </Link>
+                            <li className={"m-2 pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal text-indigo-700 focus:text-indigo-700 focus:outline-none " + (location.pathname === "/orders" ? "bg-black rounded pt-2 pb-2" : "pb-2 pt-2")}>
                                 <div className="flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-code" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" />

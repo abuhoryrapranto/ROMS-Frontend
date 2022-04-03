@@ -15,7 +15,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/categories" element={<Categories />} />
-          <Route path="/menu" element={<Menu />} />
+          <Route path="/menus" element={<Menu />} />
         </Routes>
       </BrowserRouter>
     </div>
