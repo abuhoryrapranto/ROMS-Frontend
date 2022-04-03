@@ -66,7 +66,7 @@ function Sidebar({children}) {
                                         <polyline points="8 16 10 10 16 8 14 14 8 16" />
                                         <circle cx={12} cy={12} r={9} />
                                     </svg>
-                                    <span className="ml-2">Menus</span>
+                                    <Link to="/menu"><span className="ml-2">Menu</span></Link>
                                 </div>
                             </li>
                             <li className="pl-6 cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">

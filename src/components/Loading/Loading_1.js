@@ -1,5 +1,3 @@
-
-
 export default function Loading_1() {
     return(
         <div className="flex justify-center">

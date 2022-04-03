@@ -18,8 +18,8 @@ function Categories() {
     const [category, setCategory] = useState([]);
 
     const [id, setId] = useState(null);
-   const [loading, setLoading] = useState(true);
-   const [updateModalOpen, setUpdateModalOpen] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [updateModalOpen, setUpdateModalOpen] = useState(0);
 
 
     useEffect(() => {
@@ -115,11 +115,11 @@ function Categories() {
                     focusColor="focus:ring-emerald-500"
                     click={() => {setOpen(prev => prev+1)}}
                 />
-                </div>
+            </div>
 
                 <Table tableHeaders={['Name', 'Active']} tableData={category} loading={loading} >
                 <>
-                {category.map(item => (
+                {category.length  > 0 ? category.map(item => (
                     <tr className="border-b odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 dark:border-gray-600" key={item.id}>
                         
                         <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -139,7 +139,7 @@ function Categories() {
                         </td>
 
                     </tr>
-                ))}
+                )) : "No Data Found"}
             </>
                 </Table>
 

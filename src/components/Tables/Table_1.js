@@ -24,9 +24,9 @@ function Table_1(props) {
                                                 {item}
                                             </th>
                                         ))}
-                                        <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400 float-right"
+                                        <th scope="col" className="py-3 px-6 text-xs font-bold tracking-wider text-left text-indigo-500 uppercase dark:text-gray-400 float-right"
                                         >
-                                            Edit
+                                            Actions
                                         </th>
                                     </tr>
                                 </thead>
