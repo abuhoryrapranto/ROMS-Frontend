@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { MdOutlineDashboard, MdOutlineAttachMoney, MdOutlineCategory, MdRestaurantMenu, MdOutlineListAlt } from "react-icons/md";
 
 function Sidebar({children}) {
   const [show, setShow] = useState(false);
@@ -26,68 +27,44 @@ function Sidebar({children}) {
                         
                         <ul className="py-6">
                         <Link to="/dashboard">
-                            <li className={"m-2 pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal text-indigo-700 focus:text-indigo-700 focus:outline-none " + (location.pathname === "/dashboard" ? "bg-black rounded pt-2 pb-2" : "pb-2 pt-2")}>
+                            <li className={"m-2 pl-6 cursor-pointer text-sm leading-3 tracking-normal font-semibold focus:outline-none " + (location.pathname === "/dashboard" ? "bg-emerald-500 text-white rounded pt-2 pb-2" : "pb-2 pt-2 text-gray-500 focus:text-gray-500")}>
                                 <div className="flex items-center">
                                     <div>
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" />
-                                            <rect x={4} y={4} width={6} height={6} rx={1} />
-                                            <rect x={14} y={4} width={6} height={6} rx={1} />
-                                            <rect x={4} y={14} width={6} height={6} rx={1} />
-                                            <rect x={14} y={14} width={6} height={6} rx={1} />
-                                        </svg>
+                                        <MdOutlineDashboard size={20} />
                                     </div>
                                         <span className="ml-2">Dashborad</span>
                                     </div>
                                 </li>
                             </Link>
                             <Link to="/cashbox">
-                                <li className={"m-2 pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal text-indigo-700 focus:text-indigo-700 focus:outline-none " + (location.pathname === "/cashbox" ? "bg-black rounded pt-2 pb-2" : "pb-2 pt-2")}>
+                                <li className={"m-2 pl-6 cursor-pointer text-sm leading-3 tracking-normal font-semibold focus:outline-none " + (location.pathname === "/cashbox" ? "bg-emerald-500 text-white rounded pt-2 pb-2" : "pb-2 pt-2 text-gray-500 focus:text-gray-500")}>
                                     <div className="flex items-center">
                                         <div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" />
-                                                <rect x={4} y={4} width={6} height={6} rx={1} />
-                                                <rect x={14} y={4} width={6} height={6} rx={1} />
-                                                <rect x={4} y={14} width={6} height={6} rx={1} />
-                                                <rect x={14} y={14} width={6} height={6} rx={1} />
-                                            </svg>
+                                            <MdOutlineAttachMoney size={20} />
                                         </div>
                                         <span className="ml-2">Cashbox</span>
                                     </div>
                                 </li>
                             </Link>
                             <Link to="/categories">
-                                <li className={"m-2 pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal text-indigo-700 focus:text-indigo-700 focus:outline-none " + (location.pathname === "/categories" ? "bg-black rounded pt-2 pb-2" : "pb-2 pt-2")}>
+                                <li className={"m-2 pl-6 cursor-pointer text-sm leading-3 tracking-normal font-semibold focus:outline-none " + (location.pathname === "/categories" ? "bg-emerald-500 text-white rounded pt-2 pb-2" : "pb-2 pt-2 text-gray-500 focus:text-gray-500")}>
                                     <div className="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-puzzle" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" />
-                                            <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1" />
-                                        </svg>
+                                        <MdOutlineCategory size={20} />
                                         <span className="ml-2">Categories</span>
                                     </div>
                                 </li>
                             </Link>
                             <Link to="/menus">
-                                <li className={"m-2 pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal text-indigo-700 focus:text-indigo-700 focus:outline-none " + (location.pathname === "/menus" ? "bg-black rounded pt-2 pb-2" : "pb-2 pt-2")}>
+                                <li className={"m-2 pl-6 cursor-pointer text-sm leading-3 tracking-normal font-semibold focus:outline-none " + (location.pathname === "/menus" ? "bg-emerald-500 text-white rounded pt-2 pb-2" : "pb-2 pt-2 text-gray-500 focus:text-gray-500")}>
                                     <div className="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-compass" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" />
-                                            <polyline points="8 16 10 10 16 8 14 14 8 16" />
-                                            <circle cx={12} cy={12} r={9} />
-                                        </svg>
+                                        <MdRestaurantMenu size={20} />
                                         <span className="ml-2">Menus</span>
                                     </div>
                                 </li>
                             </Link>
-                            <li className={"m-2 pl-6 cursor-pointer text-white text-sm leading-3 tracking-normal text-indigo-700 focus:text-indigo-700 focus:outline-none " + (location.pathname === "/orders" ? "bg-black rounded pt-2 pb-2" : "pb-2 pt-2")}>
+                            <li className={"m-2 pl-6 cursor-pointer text-sm leading-3 tracking-normal font-semibold focus:outline-none " + (location.pathname === "/orders" ? "bg-emerald-500 text-white rounded pt-2 pb-2" : "pb-2 pt-2 text-gray-500 focus:text-gray-500")}>
                                 <div className="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-code" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <polyline points="7 8 3 12 7 16" />
-                                        <polyline points="17 8 21 12 17 16" />
-                                        <line x1={14} y1={4} x2={10} y2={20} />
-                                    </svg>
+                                    <MdOutlineListAlt size={20}/>
                                     <span className="ml-2">Orders</span>
                                 </div>
                             </li>

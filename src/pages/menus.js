@@ -4,6 +4,7 @@ import Layout from "../components/Layouts/Sidebar";
 import Loading from '../components/Loading/Loading_1';
 import Button from '../components/Buttons/Medium';
 import Modal from "../components/Modals/Default";
+import Toast from '../components/Alert/Toast';
 
 const axios = require('axios');
 
@@ -13,6 +14,7 @@ function Menu() {
     const [loading, setLoading] = useState(true);
     const [open, setOpen] = useState(0);
     const [category, setCategory] = useState([]);
+    const [serverMessage, setServerMessage] = useState("");
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -66,9 +68,43 @@ function Menu() {
 
     }, []);
 
+    const onSubmit = async (data) => {
+
+        
+
+        const filterData = {
+            "name" : data.name,
+            "categoryId": data.category,
+            "variants": data.variants,
+            "mainPrice": parseFloat(data.mainPrice),
+            "offerPrice": data.offerPrice ? parseFloat(data.offerPrice) : null,
+            "type": data.type
+        }
+
+        console.log(filterData);
+
+        const token = localStorage.getItem('token');
+        await axios.post('/menus/save', filterData, {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        })
+            .then(res => {
+                setServerMessage("Menu saved successfully");
+                setOpen(0);
+                fetchMenus();
+            })
+            .catch(err => {
+                console.log(err)
+            })
+       
+    }
+
 
     return(
        <Layout>
+
+            { serverMessage && <Toast message={serverMessage} /> }
 
             <div style={{textAlign: "right", marginRight: "10px"}}>
                 <Button
@@ -85,10 +121,21 @@ function Menu() {
            {
                loading ? <Loading /> :
 
-               <div class="grid grid-cols-6 gap-4">
+               <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
                    {
                        menus.length > 0 ? menus.map(item => (
-                           <div className="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                           <div className="p-6 max-w-sm bg-white rounded-lg border shadow-md dark:bg-gray-800 dark:border-gray-700">
+                               <p className="mb-1 text-indigo-500 font-semibold text-xl">{item.name}</p>
+                               <hr />
+                               <div className="mt-1 mb-1">
+                               {
+                                   item.offerPrice ? <p className="text-gray-500 font-semibold">Price: <small className="text-red-500"><del>{item.mainPrice}</del></small> <span className="text-emerald-500">{item.offerPrice}</span></p>  : <p className="text-gray-500 font-semibold">Price: <span className="text-emerald-500">{item.mainPrice}</span></p>
+                               }
+                               </div>
+                               <hr />
+                               <p className="mt-1 mb-1 text-gray-500 font-semibold">Variants: <small className="text-emerald-500">{item.variants}</small></p>
+                               <hr />
+                               <p className="mt-1 text-gray-500 font-semibold">Type: <span className="text-emerald-500">{item.type}</span></p>
                            </div>
                        )) :
    
@@ -98,7 +145,7 @@ function Menu() {
                </div>
            }
 
-            <Modal title="Add New Menu" buttonName="Save" show={open} submitFun={handleSubmit()}>
+            <Modal title="Add New Menu" buttonName="Save" show={open} submitFun={handleSubmit(onSubmit)}>
 
                 <div className="mb-4 w-auto">
                     <label className="block text-indigo-500 text-sm font-bold mb-2">Name</label>
@@ -116,12 +163,19 @@ function Menu() {
                 </div>
                 <div className="mb-4 w-auto">
                     <label className="block text-indigo-500 text-sm font-bold mb-2">Category</label>
-                    <select id="countries" class="shadow appearance-none border border-indigo-500 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:shadow-outline">
+                    <select id="countries" class="shadow appearance-none border border-indigo-500 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:shadow-outline"
+                    {...register("category", { 
+                        required: "The field is required",
+                    })}
+                    >
                     <option value="">---Select---</option>
                     {category?.map(item => (
                         <option value={item.id}>{item.name}</option>
                     ))}
                     </select>
+
+                    {errors.categoryId && <small className="text-red-500">{errors.categoryId?.message}</small>}
+
                 </div>
 
                 <div className="mb-4 w-auto">
@@ -160,18 +214,23 @@ function Menu() {
                     placeholder="90"
                     {...register("offerPrice")}
                     />
-
-                    {errors.offerPrice && <small className="text-red-500">{errors.offerPrice?.message}</small>}
-
                 </div>
 
                 <div className="mb-4 w-auto">
                     <label className="block text-indigo-500 text-sm font-bold mb-2">Type</label>
-                    <select id="countries" class="shadow appearance-none border border-indigo-500 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:shadow-outline">
+                    <select class="shadow appearance-none border border-indigo-500 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:shadow-outline"
+                    {...register("type", { 
+                        required: "The field is required",
+                    })}
+                    >
                     <option value="">---Select---</option>
                     <option value="regular">Regular</option>
                     <option value="addon">Addon</option>
                     </select>
+
+                    {errors.type && <small className="text-red-500">{errors.type?.message}</small>}
+
+
                 </div>
 
             </Modal>
