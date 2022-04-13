@@ -5,6 +5,7 @@ import Loading from '../components/Loading/Loading_1';
 import Button from '../components/Buttons/Medium';
 import Modal from "../components/Modals/Default";
 import Toast from '../components/Alert/Toast';
+import ProductCard from "../components/Cards/ProductCard";
 
 const axios = require('axios');
 
@@ -16,7 +17,7 @@ function Menu() {
     const [category, setCategory] = useState([]);
     const [serverMessage, setServerMessage] = useState("");
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     useEffect(() => {
         document.title = "Menus"
@@ -75,7 +76,7 @@ function Menu() {
         const filterData = {
             "name" : data.name,
             "categoryId": data.category,
-            "variants": data.variants,
+            "variants": data.variants ? data.variants : null,
             "mainPrice": parseFloat(data.mainPrice),
             "offerPrice": data.offerPrice ? parseFloat(data.offerPrice) : null,
             "type": data.type
@@ -90,16 +91,19 @@ function Menu() {
             }
         })
             .then(res => {
-                setServerMessage("Menu saved successfully");
-                setOpen(0);
-                fetchMenus();
+                if(res.status === 201) {
+                    setServerMessage("Menu saved successfully");
+                    setOpen(0);
+                    fetchMenus();
+                }
             })
             .catch(err => {
                 console.log(err)
             })
+
+            reset();
        
     }
-
 
     return(
        <Layout>
@@ -117,33 +121,9 @@ function Menu() {
                     click={() => {setOpen(prev => prev+1)}}
                 />
             </div>
+            <br />
            
-           {
-               loading ? <Loading /> :
-
-               <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
-                   {
-                       menus.length > 0 ? menus.map(item => (
-                           <div className="p-6 max-w-sm bg-white rounded-lg border shadow-md dark:bg-gray-800 dark:border-gray-700">
-                               <p className="mb-1 text-indigo-500 font-semibold text-xl">{item.name}</p>
-                               <hr />
-                               <div className="mt-1 mb-1">
-                               {
-                                   item.offerPrice ? <p className="text-gray-500 font-semibold">Price: <small className="text-red-500"><del>{item.mainPrice}</del></small> <span className="text-emerald-500">{item.offerPrice}</span></p>  : <p className="text-gray-500 font-semibold">Price: <span className="text-emerald-500">{item.mainPrice}</span></p>
-                               }
-                               </div>
-                               <hr />
-                               <p className="mt-1 mb-1 text-gray-500 font-semibold">Variants: <small className="text-emerald-500">{item.variants}</small></p>
-                               <hr />
-                               <p className="mt-1 text-gray-500 font-semibold">Type: <span className="text-emerald-500">{item.type}</span></p>
-                           </div>
-                       )) :
-   
-                       "No Data Found!"
-                   }
-                   
-               </div>
-           }
+           { loading ? <Loading /> : <ProductCard menus={menus} /> }
 
             <Modal title="Add New Menu" buttonName="Save" show={open} submitFun={handleSubmit(onSubmit)}>
 
@@ -163,14 +143,14 @@ function Menu() {
                 </div>
                 <div className="mb-4 w-auto">
                     <label className="block text-indigo-500 text-sm font-bold mb-2">Category</label>
-                    <select id="countries" class="shadow appearance-none border border-indigo-500 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:shadow-outline"
+                    <select id="countries" className="shadow appearance-none border border-indigo-500 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:shadow-outline"
                     {...register("category", { 
                         required: "The field is required",
                     })}
                     >
                     <option value="">---Select---</option>
                     {category?.map(item => (
-                        <option value={item.id}>{item.name}</option>
+                        <option key={item.id} value={item.id}>{item.name}</option>
                     ))}
                     </select>
 
@@ -218,7 +198,7 @@ function Menu() {
 
                 <div className="mb-4 w-auto">
                     <label className="block text-indigo-500 text-sm font-bold mb-2">Type</label>
-                    <select class="shadow appearance-none border border-indigo-500 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:shadow-outline"
+                    <select className="shadow appearance-none border border-indigo-500 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:shadow-outline"
                     {...register("type", { 
                         required: "The field is required",
                     })}
