@@ -1,34 +1,42 @@
+export default function Cart(props){
 
-export default function Cart(){
     return(
-        <div className="fixed top-20 right-6">
-            <div class="p-4 w-96 h-screen bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex justify-between items-center mb-4">
-        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Cart Items</h5>
-   </div>
-   <div class="flow-root">
-        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-            <li class="py-3 sm:py-4">
-                <div class="flex items-center space-x-4">
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            Neil Sims
-                        </p>
-                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                            email@windster.com
-                        </p>
+                <div className="relative p-4 w-96 bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700" style={{minHeight: "85vh", display: (props.show) ? "block" : "none"}}>
+                <div className="flex justify-between items-center mb-4">
+                    <h5 className="inline text-xl font-bold leading-none text-gray-900 dark:text-white">Cart Items</h5>
+                    <span className="inline"> 
+                    <button type="button" className="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800"
+                    onClick={props.click}
+                    >
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
+                    </span>
+                </div>
+                    <div className="flow-root">
+                        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                            <li className="py-3 sm:py-4">
+                                <div className="flex items-center space-x-4">
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                            Neil Sims
+                                        </p>
+                                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                            email@windster.com
+                                        </p>
+                                    </div>
+                                    <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                                        $320
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $320
+                    <div className="absolute bottom-2 right-5">
+                    <button type="button" className="text-white bg-emerald-500 hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm px-8 py-2.5 text-center inline-flex items-center dark:bg-emerald-500 dark:hover:bg-emerald-600 dark:focus:ring-emerald-700">
+                        Place Order
+                        <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
                     </div>
                 </div>
-            </li>
-        </ul>
-   </div>
-   <div>
-   <button className="" type="button">Cancel</button>
-   </div>
-</div>
-        </div>
     );
 }

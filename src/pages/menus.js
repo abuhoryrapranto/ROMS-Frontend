@@ -7,6 +7,7 @@ import Modal from "../components/Modals/Default";
 import Toast from '../components/Alert/Toast';
 import ProductCard from "../components/Cards/ProductCard";
 import Cart from "../components/Cards/Cart";
+import { BsCart4 } from "react-icons/bs";
 
 const axios = require('axios');
 
@@ -17,6 +18,7 @@ function Menu() {
     const [open, setOpen] = useState(0);
     const [category, setCategory] = useState([]);
     const [serverMessage, setServerMessage] = useState("");
+    const [cartshow, setCartshow] = useState(false)
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -72,8 +74,6 @@ function Menu() {
 
     const onSubmit = async (data) => {
 
-        
-
         const filterData = {
             "name" : data.name,
             "categoryId": data.category,
@@ -82,8 +82,6 @@ function Menu() {
             "offerPrice": data.offerPrice ? parseFloat(data.offerPrice) : null,
             "type": data.type
         }
-
-        console.log(filterData);
 
         const token = localStorage.getItem('token');
         await axios.post('/menus/save', filterData, {
@@ -106,25 +104,50 @@ function Menu() {
        
     }
 
-    return(
-       <Layout>
+    function closeCart() {
+        setCartshow(false);
+    }
 
+    function addCart() {
+        setCartshow(true);
+    }
+
+    return(
+
+       <Layout>
             { serverMessage && <Toast message={serverMessage} /> }
 
-            <div style={{textAlign: "right", marginRight: "10px"}}>
-                <Button
-                    name="Add New"
-                    bgColor="bg-emerald-500"
-                    textColor="text-white"
-                    fontWeight="font-semibold"
-                    hover="hover:bg-emerald-600"
-                    focusColor="focus:ring-emerald-500"
-                    click={() => {setOpen(prev => prev+1)}}
-                />
+            <div className="absolute z-10 right-6">
+                <Cart show={cartshow} click={closeCart} />
             </div>
-            <br />
-            <Cart />
-           { loading ? <Loading /> : <ProductCard menus={menus} /> }
+
+            {
+                !cartshow && 
+
+                <div className="absolute z-10 bottom-0 right-0">
+                    <button type="button" class="px-3 py-2 text-xs font-medium text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 mr-1 mb-1"
+                    onClick={() => setCartshow(prev => !prev)}
+                    >
+                        <BsCart4 size={20} />
+                    </button>
+                </div>
+            }
+
+            <div className="relative">
+                <div style={{textAlign: "right", marginRight: "10px", zIndex:"1"}}>
+                    <Button
+                        name="Add New"
+                        bgColor="bg-emerald-500"
+                        textColor="text-white"
+                        fontWeight="font-semibold"
+                        hover="hover:bg-emerald-600"
+                        focusColor="focus:ring-emerald-500"
+                        click={() => {setOpen(prev => prev+1)}}
+                    />
+                </div>
+                <br />
+            { loading ? <Loading /> : <ProductCard menus={menus} addCart={addCart} /> }
+            </div>
 
             <Modal title="Add New Menu" buttonName="Save" show={open} submitFun={handleSubmit(onSubmit)}>
 
