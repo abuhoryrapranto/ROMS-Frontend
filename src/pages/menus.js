@@ -115,7 +115,10 @@ function Menu() {
     return(
 
        <Layout>
-            { serverMessage && <Toast message={serverMessage} /> }
+            
+            <div className="absolute right-6 z-10">
+                { serverMessage && <Toast message={serverMessage} /> }
+            </div>
 
             <div className="absolute z-10 right-6">
                 <Cart show={cartshow} click={closeCart} />
@@ -134,7 +137,7 @@ function Menu() {
             }
 
             <div className="relative">
-                <div style={{textAlign: "right", marginRight: "10px", zIndex:"1"}}>
+                <div style={{textAlign: "right", marginRight: "10px"}}>
                     <Button
                         name="Add New"
                         bgColor="bg-emerald-500"
@@ -183,11 +186,11 @@ function Menu() {
                 </div>
 
                 <div className="mb-4 w-auto">
-                    <label className="block text-indigo-500 text-sm font-bold mb-2">Variants</label>
+                    <label className="block text-indigo-500 text-sm font-bold mb-2">Variant</label>
                     <input 
                     className="shadow appearance-none border border-indigo-500 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:shadow-outline" 
                     type="text" 
-                    placeholder="Big, Medium, Small"
+                    placeholder="Big"
                     {...register("variants")}
                     />
 

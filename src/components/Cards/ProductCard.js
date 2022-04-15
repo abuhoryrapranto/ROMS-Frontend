@@ -24,7 +24,7 @@ export default function ProductCard(props) {
                                 }
                                 </div>
                                 <hr />
-                                <p className="mt-1 mb-1 text-gray-500 font-semibold">Variants: <small className="text-emerald-500">{item.variants ? item.variants : <span className="text-red-500">No variants added</span> }</small></p>
+                                <p className="mt-1 mb-1 text-gray-500 font-semibold">Variant: <small className="text-emerald-500">{item.variants ? item.variants : <span className="text-red-500">None</span> }</small></p>
                                 <hr />
                                 <p className="mt-1 mb-1 text-gray-500 font-semibold">Type: <span className="text-emerald-500">{item.type}</span></p>
                                 <hr />
