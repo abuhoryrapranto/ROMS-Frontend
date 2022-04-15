@@ -6,6 +6,7 @@ import Button from '../components/Buttons/Medium';
 import Modal from "../components/Modals/Default";
 import Toast from '../components/Alert/Toast';
 import ProductCard from "../components/Cards/ProductCard";
+import Cart from "../components/Cards/Cart";
 
 const axios = require('axios');
 
@@ -122,7 +123,7 @@ function Menu() {
                 />
             </div>
             <br />
-           
+            <Cart />
            { loading ? <Loading /> : <ProductCard menus={menus} /> }
 
             <Modal title="Add New Menu" buttonName="Save" show={open} submitFun={handleSubmit(onSubmit)}>
