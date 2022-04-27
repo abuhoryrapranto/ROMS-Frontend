@@ -39,6 +39,7 @@ function Categories() {
                 setCategory(res.data.data);
             })
             .catch(err => {
+                setLoading(false);
                 console.log(err)
             })
     }
@@ -117,31 +118,37 @@ function Categories() {
                 />
             </div>
 
-                <Table tableHeaders={['Name', 'Active']} tableData={category} loading={loading} >
-                <>
-                {category.length  > 0 ? category.map(item => (
-                    <tr className="border-b odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 dark:border-gray-600" key={item.id}>
-                        
-                        <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {item.name}
-                        </td>
+                {
+                    category.length > 0 ?
 
-                        <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {
-                                item.status ? <span className="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Yes</span>
-                                :
-                                <span className="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">No</span>
-                            }
-                        </td>
+                    <Table tableHeaders={['Name', 'Active']} tableData={category} loading={loading} >
+                    <>
+                        {category.map(item => (
+                            <tr className="border-b odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700 dark:border-gray-600" key={item.id}>
+                                
+                                <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {item.name}
+                                </td>
 
-                        <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                            <button data-name={item.name} data-id={item.id} className="text-blue-600 dark:text-blue-500 hover:underline" onClick={(e) => {updateModalValue(e);setUpdateModalOpen(prev => prev+1)}}>Edit</button> 
-                        </td>
+                                <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {
+                                        item.status ? <span className="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Yes</span>
+                                        :
+                                        <span className="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">No</span>
+                                    }
+                                </td>
 
-                    </tr>
-                )) : "No Data Found"}
-            </>
-                </Table>
+                                <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                    <button data-name={item.name} data-id={item.id} className="text-blue-600 dark:text-blue-500 hover:underline" onClick={(e) => {updateModalValue(e);setUpdateModalOpen(prev => prev+1)}}>Edit</button> 
+                                </td>
+
+                            </tr>
+                        ))}
+                    </>
+                    </Table> :
+
+                    "No Data Found!"
+                }
 
                 <div>
                     <Modal title="Add New Category" buttonName="Save" show={open} submitFun={handleSubmit(onSubmit)}>

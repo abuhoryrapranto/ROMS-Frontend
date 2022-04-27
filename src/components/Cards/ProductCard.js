@@ -50,8 +50,8 @@ export default function ProductCard(props) {
                                     </div>
                                     
                                     <div className="cursor-pointer float-right">
-                                        <button type="button" class="text-emerald-500 border border-emerald-500 hover:bg-emerald-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:border-emerald-500 dark:text-emerald-500 dark:hover:text-white dark:focus:ring-emerald-800"
-                                        onClick={props.addCart}
+                                        <button type="button" className="text-emerald-500 border border-emerald-500 hover:bg-emerald-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center mr-2 dark:border-emerald-500 dark:text-emerald-500 dark:hover:text-white dark:focus:ring-emerald-800"
+                                        onClick={() => props.addCart({id:item.slug, name:item.name, variant: item.variants, price: item.offerPrice ? item.offerPrice : item.mainPrice})}
                                         >
                                             <FaPlus />
                                         </button>

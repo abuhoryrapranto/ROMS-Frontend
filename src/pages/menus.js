@@ -18,7 +18,8 @@ function Menu() {
     const [open, setOpen] = useState(0);
     const [category, setCategory] = useState([]);
     const [serverMessage, setServerMessage] = useState("");
-    const [cartshow, setCartshow] = useState(false)
+    const [cartshow, setCartshow] = useState(false);
+    const [cartdata, setCartdata] = useState([]);
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -108,9 +109,48 @@ function Menu() {
         setCartshow(false);
     }
 
-    function addCart() {
-        setCartshow(true);
+    function loadCart() {
+        const cart = JSON.parse(localStorage.getItem('cart'));
+
+        if(cart) {
+
+            setCartdata(cart);
+        }
     }
+
+    function addCart(item) {
+
+        const infos = {
+            id: item.id,
+            name: item.name,
+            variant: item.variant,
+            price: item.price
+        }
+        
+        const cart = localStorage.getItem('cart');
+
+        if(cart) {
+
+            let data = JSON.parse(cart);
+            data.push(infos);
+            localStorage.setItem('cart', JSON.stringify(data));
+            loadCart();
+            setCartshow(true);
+
+        } else {
+
+            localStorage.setItem('cart', JSON.stringify([infos]));
+            loadCart();
+            setCartshow(true);
+        }
+
+    }
+
+    useEffect(() => {
+
+        loadCart();
+
+    }, []);
 
     return(
 
@@ -121,14 +161,14 @@ function Menu() {
             </div>
 
             <div className="absolute z-10 right-6">
-                <Cart show={cartshow} click={closeCart} />
+                <Cart show={cartshow} click={closeCart} items={cartdata} />
             </div>
 
             {
                 !cartshow && 
 
                 <div className="absolute z-10 bottom-0 right-0">
-                    <button type="button" class="px-3 py-2 text-xs font-medium text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 mr-1 mb-1"
+                    <button type="button" className="px-3 py-2 text-xs font-medium text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 mr-1 mb-1"
                     onClick={() => setCartshow(prev => !prev)}
                     >
                         <BsCart4 size={20} />

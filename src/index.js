@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import 'flowbite';
 const axios = require('axios');
 
-axios.defaults.baseURL = "https://manager-stage.herokuapp.com/api/v1";
+axios.defaults.baseURL = "http://localhost:5001/api/v1";
 //axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
 
 ReactDOM.render(
