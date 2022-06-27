@@ -124,7 +124,8 @@ function Menu() {
             id: item.id,
             name: item.name,
             variant: item.variant,
-            price: item.price
+            price: item.price,
+            qty: 1
         }
         
         const cart = localStorage.getItem('cart');
@@ -132,10 +133,33 @@ function Menu() {
         if(cart) {
 
             let data = JSON.parse(cart);
-            data.push(infos);
-            localStorage.setItem('cart', JSON.stringify(data));
-            loadCart();
-            setCartshow(true);
+
+            let found_data = data.find(item=> item.id === infos.id);
+
+            const index = data.findIndex(item => item.id === infos.id);
+
+            if(found_data) {
+
+                let qty = found_data.qty;
+                let price = found_data.price;
+                data.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(data));
+                infos['qty'] = qty + 1;
+                infos['price'] = parseFloat(price) + parseFloat(infos.price);
+                data.push(infos);
+                localStorage.setItem('cart', JSON.stringify(data));
+                loadCart();
+                setCartshow(true);
+
+            } else {
+
+                //console.log(infos);
+
+                data.push(infos);
+                localStorage.setItem('cart', JSON.stringify(data));
+                loadCart();
+                setCartshow(true);
+           }
 
         } else {
 

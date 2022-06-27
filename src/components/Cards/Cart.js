@@ -1,11 +1,5 @@
 export default function Cart(props){
 
-    // let items = JSON.parse(localStorage.getItem('cart'));
-
-    // useEffect(() => {
-       
-    // },[])
-
     return(
                 <div className="relative p-4 w-96 bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700" style={{minHeight: "85vh", display: (props.show) ? "block" : "none"}}>
                 <div className="flex justify-between items-center mb-4">
@@ -21,29 +15,37 @@ export default function Cart(props){
                     <div className="flow-root">
                         <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                             {
-                               props.items.length > 0 ? props.items.map(item => (
-
+                               props.items.length > 0 ? props.items.map(item => ( 
+                                
                                 <li className="py-3 sm:py-4" key={item.id + Math.random()}>
                                     <div className="flex items-center space-x-4">
                                         <div className="flex-1 min-w-0">
                                             <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                               { item.name}
+                                               {item.name} <span className="text-orange-500">x</span> <span className="text-green-500">{item.qty}</span>
                                             </p>
                                             <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                                                 {item.variant}
                                             </p>
                                         </div>
                                         <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                                            {item.price}
+                                            {parseFloat(item.price)}$
                                         </div>
                                     </div>
                                 </li>
 
-                               )) :
+                               ))
+                               :
                             "No Cart Data Found!"
                             }
                         </ul>
-                    </div>
+                        <hr />
+                        <div className="flex-1 min-w-0">
+                            <p className="text-sm font-medium text-green-500 truncate dark:text-white float-left">Total</p>
+                        </div>
+                        <div className="inline-flex items-center text-base font-semibold text-orange-500 dark:text-white float-right">
+                            {props.items.length > 0 && props.items.reduce((prev, curr) => prev + parseFloat(curr.price) , 0)}$
+                        </div>
+                    </div> 
                     <div className="absolute bottom-2 right-5">
                     <button type="button" className="text-white bg-emerald-500 hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm px-8 py-2.5 text-center inline-flex items-center dark:bg-emerald-500 dark:hover:bg-emerald-600 dark:focus:ring-emerald-700">
                         Place Order
